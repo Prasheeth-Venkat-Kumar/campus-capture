@@ -3,27 +3,27 @@
 ------------------------------------------------------*/
 
 body {
-  background-color: #172a3a;
+  background-color: #14213D;
   margin: 0;
   font-family: "Open Sans", sans-serif;
   font-weight: 200;
   position: relative;
   min-height: 100vh;
-  color: white;
+  color: black;
 }
 
 main h1 {
   text-align: center;
   padding: 30px;
-  color: white;
+  color: black;
 }
 
 main h2 {
   text-align: center;
-  color: white;
+  color: black;
 }
 
 main h3 {
   text-align: center;
-  color: white;
+  color: black;
 }
