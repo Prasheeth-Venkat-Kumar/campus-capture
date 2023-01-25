@@ -1,0 +1,46 @@
+/* create header bar */
+.page-header {
+  background-color: #fca311;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* create header title */
+.page-title {
+  color: white;
+  font-size: 4.5em;
+  justify-self: flex-end;
+}
+
+.header-logo {
+  width: 70px;
+  height: 70px;
+  margin-left: 20px;
+}
+
+.header-logo-counter-balance {
+  width: 70px;
+  height: 70px;
+  margin-right: 20px;
+  visibility: hidden;
+}
+
+/* create header bar */
+.page-footer {
+  background-color: #fca311;
+  width: 100%;
+  height: 5vh;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  font-size: 12px;
+
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}

@@ -1,12 +1,12 @@
-import "./App.css";
-import Footer from "./GlobalElements/Footer";
+import "./App.css"
+import DisplayPage from "./DisplayPage/DisplayPage"
 
 function App() {
   return (
     <div className="App">
-      <Footer />
+      <DisplayPage />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
