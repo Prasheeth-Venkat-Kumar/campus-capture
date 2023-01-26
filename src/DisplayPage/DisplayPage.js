@@ -12,6 +12,7 @@ function DisplayPage() {
   let slideIndex = 0
   //
   const [customImage, setCustomImage] = useState(null)
+  const [fileURL, setFileURL] = useState(null)
 
   function handleSlideChange(activeIndex) {
     slideIndex = activeIndex
@@ -20,6 +21,11 @@ function DisplayPage() {
 
   function isSlideCustomImage() {
     return slideIndex == 0
+  }
+
+  function handleCustomImageUpload(event) {
+    setCustomImage(event.target.files[0])
+    setFileURL(URL.createObjectURL(event.target.files[0]))
   }
 
   return (
@@ -48,11 +54,11 @@ function DisplayPage() {
               <input
                 type="file"
                 accept="image/*"
-                onChange={(event) => setCustomImage(event.target.files[0])}
+                onChange={(event) => handleCustomImageUpload(event)}
               />
             )}
             {customImage && (
-              <img src={customImage} alt="Custom Picture of a UNCC building" />
+              <img src={fileURL} alt="Custom Picture of a UNCC building" />
             )}
           </SwiperSlide>
           <SwiperSlide>
