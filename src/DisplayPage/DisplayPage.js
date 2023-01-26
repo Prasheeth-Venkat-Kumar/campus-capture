@@ -4,8 +4,24 @@ import "swiper/css"
 import "swiper/css/navigation"
 // import required modules
 import { Navigation } from "swiper"
+import { useState } from "react"
+// import pics from "../pics"
 
 function DisplayPage() {
+  //
+  let slideIndex = 0
+  //
+  const [customImage, setCustomImage] = useState(null)
+
+  function handleSlideChange(activeIndex) {
+    slideIndex = activeIndex
+    console.log("Active Slide Index: ", slideIndex)
+  }
+
+  function isSlideCustomImage() {
+    return slideIndex == 0
+  }
+
   return (
     <div>
       <div className="page-header">
@@ -22,12 +38,30 @@ function DisplayPage() {
         />
       </div>
       <div className="slide-show">
-        <Swiper navigation={true} modules={[Navigation]}>
-          <SwiperSlide>Slide 1</SwiperSlide>
-          <SwiperSlide>Slide 2</SwiperSlide>
-          <SwiperSlide>Slide 3</SwiperSlide>
-          <SwiperSlide>Slide 4</SwiperSlide>
-          <SwiperSlide>Slide 5</SwiperSlide>
+        <Swiper
+          navigation={true}
+          modules={[Navigation]}
+          onSlideChange={(swiper) => handleSlideChange(swiper.activeIndex)}
+        >
+          <SwiperSlide>
+            {!customImage && (
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(event) => setCustomImage(event.target.files[0])}
+              />
+            )}
+            {customImage && (
+              <img src={customImage} alt="Custom Picture of a UNCC building" />
+            )}
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src={require("../pics/urec.jpg")} alt="Picture of UREC" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src={require("../pics/CHHS (25).jpg")} alt="Picture of CHHS" />
+          </SwiperSlide>
+          {/* <SwiperSlide>Slide 5</SwiperSlide> */}
         </Swiper>
       </div>
 
