@@ -1,32 +1,162 @@
-import "./App.css";
-import DisplayPage from "./DisplayPage/DisplayPage";
-import * as ort from "onnxruntime-web";
-import { Tensor, InferenceSession } from "onnxruntime-web";
+import "./App.css"
+import DisplayPage from "./DisplayPage/DisplayPage"
+import * as ort from "onnxruntime-web"
+import { Tensor, InferenceSession } from "onnxruntime-web"
+// import { fromPixels } from "@tensorflow/tfjs-core/dist/ops/browser"
+
+import * as tf from "@tensorflow/tfjs"
 
 function App() {
-  loadModel();
+  loadModel()
   return (
     <div className="App">
       <DisplayPage />
     </div>
-  );
+  )
 }
 
 async function loadModel() {
-  console.log("Session created");
+  console.log("Session created")
+  // console.log(tf.backend_registry.mappings)
+  // tf.setBackend("cpu")
+
   const session = await InferenceSession.create("./model.onnx", {
     executionProviders: ["webgl"],
-  });
+  })
 
-  console.log("Model loaded");
-  const input = new Tensor(
-    "float32",
-    new Float32Array(1 * 3 * 224 * 224),
-    [1, 3, 224, 224]
-  );
-  const outputMap = await session.run(input);
-  const outputTensor = outputMap.values().next().value;
-  console.log("Output tensor: ${outputTensor.data}");
+  console.log("Model loaded")
+  // custom image
+  // const image = await Jimp.read("./belktest.jpg")
+  // const imageData = image.bitmap.data
+  // const image = await loadImage("./belktest.jpg")
+  // load image from path belk
+  const testImage = new Image()
+  testImage.src = "union.jpeg"
+  // checkIfPathExists(testImage.src)
+
+  testImage.onload = async () => {
+    console.log("Image loaded")
+    // Convert image to tensor
+    const imgTensor = tf.browser.fromPixels(testImage)
+    console.log("Inital image tensor shape", imgTensor.shape)
+    // resize tensor to 224, 224, 3
+    const reshapedImgTensor = tf.image.resizeBilinear(imgTensor, [224, 224])
+    console.log("Reszied image tensor shape", reshapedImgTensor.shape)
+    // transpose tensor to channel first
+    const transImgTensor = reshapedImgTensor.transpose([2, 0, 1])
+    console.log("Converted image tensor shape", transImgTensor.shape)
+    // flatten tensor
+    const flattenedTensor = transImgTensor.flatten()
+    // convert to array
+    const arrayTensor = flattenedTensor.arraySync()
+    // normalize tensor
+    const normalizedTensor = arrayTensor.map((x) => x / (225 * 2 - 1))
+
+    // crate ONNX tensor
+    const inputTensor = new Tensor(
+      "float32",
+      new Float32Array(normalizedTensor),
+      [1, 3, 224, 224]
+    )
+    // create feeds
+    const feeds = {
+      "input.1": inputTensor,
+    }
+    // run model
+    const outputMap = await session.run(feeds)
+    console.log(outputMap["495"].data)
+    console.log(testImage.src)
+    getBuildingName(outputMap["495"].data)
+  }
+
+  // create function to get the highest value from the parameter array
+  function getBuildingName(predictionsArray) {
+    const max = Math.max(...predictionsArray)
+    const index = predictionsArray.indexOf(max)
+    switch (index) {
+      case 0:
+        console.log("Smith")
+        break
+      case 1:
+        console.log("Belk")
+        break
+      case 2:
+        console.log("Colvard")
+        break
+      case 3:
+        console.log("Prospector")
+        break
+      case 4:
+        console.log("Burson")
+        break
+      case 5:
+        console.log("Atkins")
+        break
+      case 6:
+        console.log("SAC")
+        break
+      case 7:
+        console.log("Cato")
+        break
+      case 8:
+        console.log("Woodward")
+        break
+      case 9:
+        console.log("CHHS")
+        break
+      case 10:
+        console.log("Student Union")
+        break
+      case 11:
+        console.log("UREC")
+        break
+      default:
+        console.log("No building found")
+    }
+  }
+
+  // // reshape to 1, 3, 224, 224
+  // const inputTensor = tf.reshape(
+  //   Float32Array(convertedTensor),
+  //   [1, 3, 224, 224]
+  // )
+
+  // const inputTensor = new Tensor(
+  //   "float32",
+  //   new Float32Array(3 * 224 * 224),
+  //   [1, 3, 224, 224]
+  // )
+  // const feeds = {
+  //   "input.1": inputTensor,
+  // }
+  // // console.log(feeds)
+  // const outputMap = await session.run(feeds)
+  // console.log(outputMap)
 }
 
-export default App;
+async function predictImage(imageTensor) {
+  const session = await InferenceSession.create("./model.onnx", {
+    executionProviders: ["webgl"],
+  })
+
+  const inputTensor = new Tensor(
+    "float32",
+    new Float32Array(imageTensor),
+    [1, 3, 224, 224]
+  )
+  const feeds = {
+    "input.1": inputTensor,
+  }
+  const outputMap = await session.run(feeds)
+  console.log(outputMap)
+}
+
+function checkIfPathExists(path) {
+  try {
+    const file = require(path)
+  } catch (err) {
+    console.log("File does not exist")
+  }
+}
+
+export default App
