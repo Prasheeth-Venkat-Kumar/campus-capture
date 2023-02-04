@@ -22,14 +22,9 @@ async function loadModel() {
   })
 
   console.log("Model loaded")
-  // custom image
-  // const image = await Jimp.read("./belktest.jpg")
-  // const imageData = image.bitmap.data
-  // const image = await loadImage("./belktest.jpg")
-  // load image from path belk
+
   const testImage = new Image()
   testImage.src = "union.jpeg"
-  // checkIfPathExists(testImage.src)
 
   testImage.onload = async () => {
     console.log("Image loaded")
