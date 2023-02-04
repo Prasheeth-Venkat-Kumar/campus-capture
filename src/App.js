@@ -1,9 +1,6 @@
 import "./App.css"
 import DisplayPage from "./DisplayPage/DisplayPage"
-import * as ort from "onnxruntime-web"
 import { Tensor, InferenceSession } from "onnxruntime-web"
-// import { fromPixels } from "@tensorflow/tfjs-core/dist/ops/browser"
-
 import * as tf from "@tensorflow/tfjs"
 
 function App() {
@@ -114,41 +111,6 @@ async function loadModel() {
         console.log("No building found")
     }
   }
-
-  // // reshape to 1, 3, 224, 224
-  // const inputTensor = tf.reshape(
-  //   Float32Array(convertedTensor),
-  //   [1, 3, 224, 224]
-  // )
-
-  // const inputTensor = new Tensor(
-  //   "float32",
-  //   new Float32Array(3 * 224 * 224),
-  //   [1, 3, 224, 224]
-  // )
-  // const feeds = {
-  //   "input.1": inputTensor,
-  // }
-  // // console.log(feeds)
-  // const outputMap = await session.run(feeds)
-  // console.log(outputMap)
-}
-
-async function predictImage(imageTensor) {
-  const session = await InferenceSession.create("./model.onnx", {
-    executionProviders: ["webgl"],
-  })
-
-  const inputTensor = new Tensor(
-    "float32",
-    new Float32Array(imageTensor),
-    [1, 3, 224, 224]
-  )
-  const feeds = {
-    "input.1": inputTensor,
-  }
-  const outputMap = await session.run(feeds)
-  console.log(outputMap)
 }
 
 function checkIfPathExists(path) {
