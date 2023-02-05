@@ -22,7 +22,9 @@ async function loadModel() {
   })
 
   console.log("Model loaded")
+}
 
+async function predictImage(image, session) {
   const testImage = new Image()
   testImage.src = "union.jpeg"
 
