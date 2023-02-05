@@ -13,6 +13,7 @@ function DisplayPage() {
   //
   const [customImage, setCustomImage] = useState(null)
   const [fileURL, setFileURL] = useState(null)
+  const [isPredictionActive, setIsPredictionActive] = useState(true)
 
   function handleSlideChange(activeIndex) {
     slideIndex = activeIndex
@@ -70,6 +71,13 @@ function DisplayPage() {
           {/* <SwiperSlide>Slide 5</SwiperSlide> */}
         </Swiper>
       </div>
+      {isPredictionActive && (
+        <div className="prediction-sec">
+          <h2>Prediction</h2>
+          <p>Building Name:{"TODO"}</p>
+          <p>Predicted Building Name:{"TODO"}</p>
+        </div>
+      )}
 
       <div className="page-footer">
         <p>
