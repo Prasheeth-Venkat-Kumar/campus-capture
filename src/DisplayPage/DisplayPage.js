@@ -5,6 +5,7 @@ import "swiper/css/navigation"
 // import required modules
 import { Navigation } from "swiper"
 import { useState } from "react"
+import { Button } from "@mui/material"
 // import pics from "../pics"
 
 function DisplayPage() {
@@ -44,6 +45,9 @@ function DisplayPage() {
           alt="Campus Capture Logo"
         />
       </div>
+      <h1 className="predict-title">
+        Predicting UNC Charlotte Buildings with a Picture
+      </h1>
       <div className="slide-show">
         <Swiper
           navigation={true}
@@ -63,21 +67,26 @@ function DisplayPage() {
             )}
           </SwiperSlide>
           <SwiperSlide>
-            <img src={require("../pics/urec.jpg")} alt="Picture of UREC" />
+            <img src={require("../pics/urec1.jpg")} alt="Picture of UREC" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={require("../pics/CHHS (25).jpg")} alt="Picture of CHHS" />
+            <img src={require("../pics/chhs1.jpg")} alt="Picture of CHHS" />
           </SwiperSlide>
           {/* <SwiperSlide>Slide 5</SwiperSlide> */}
         </Swiper>
       </div>
       {isPredictionActive && (
         <div className="prediction-sec">
-          <h2>Prediction</h2>
-          <p>Building Name:{"TODO"}</p>
-          <p>Predicted Building Name:{"TODO"}</p>
+          <p>Building Name:{"Sample"}</p>
+          <p>Predicted Building Name:{"Sample"}</p>
         </div>
       )}
+
+      <div className="predict-button">
+        <Button variant="contained" color="primary">
+          PREDICT BUILDING
+        </Button>
+      </div>
 
       <div className="page-footer">
         <p>
