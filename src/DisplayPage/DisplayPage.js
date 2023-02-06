@@ -8,8 +8,7 @@ import { useState } from "react"
 import { Button } from "@mui/material"
 // import pics from "../pics"
 
-function DisplayPage() {
-  //
+function DisplayPage({ predictImage }) {
   let slideIndex = 0
   //
   const [customImage, setCustomImage] = useState(null)
@@ -28,6 +27,10 @@ function DisplayPage() {
   function handleCustomImageUpload(event) {
     setCustomImage(event.target.files[0])
     setFileURL(URL.createObjectURL(event.target.files[0]))
+  }
+
+  function handlePredictButtonClick() {
+    predictImage()
   }
 
   return (
@@ -83,7 +86,11 @@ function DisplayPage() {
       )}
 
       <div className="predict-button">
-        <Button variant="contained" color="primary">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => handlePredictButtonClick()}
+        >
           PREDICT BUILDING
         </Button>
       </div>
