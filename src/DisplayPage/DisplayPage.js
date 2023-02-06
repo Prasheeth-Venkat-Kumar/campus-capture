@@ -20,7 +20,7 @@ function DisplayPage({ predictImage, theme }) {
   const [selectedBldName, setSelectedBldName] = useState(null)
   const [predictedBldName, setPredictedBldName] = useState(null)
 
-  const imgPaths = ["", "/pics/belk1.jpg", "/pics/colvard1.jpg"]
+  const imgPaths = ["/pics/belk1.jpg", "/pics/colvard1.jpg"]
 
   function handleSlideChange(activeIndex) {
     slideIndex = activeIndex
@@ -80,12 +80,11 @@ function DisplayPage({ predictImage, theme }) {
               <img src={fileURL} alt="Custom Picture of a UNCC building" />
             )}
           </SwiperSlide>
-          <SwiperSlide>
-            <img src={imgPaths[1]} alt="Picture of UREC" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src={imgPaths[2]} alt="Picture of CHHS" />
-          </SwiperSlide>
+          {imgPaths.map((imgPath, index) => (
+            <SwiperSlide key={index}>
+              <img src={imgPath} alt="UNCC building" />
+            </SwiperSlide>
+          ))}
           {/* <SwiperSlide>Slide 5</SwiperSlide> */}
         </Swiper>
       </div>
