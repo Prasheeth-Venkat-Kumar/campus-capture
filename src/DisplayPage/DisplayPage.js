@@ -18,8 +18,12 @@ function DisplayPage({ predictImage }) {
   //
   const [selectedBldName, setSelectedBldName] = useState(null)
   const [predictedBldName, setPredictedBldName] = useState(null)
+  // let selectedBldName = null
 
-  const imgPaths = ["/pics/belk1.jpg", "/pics/colvard1.jpg"]
+  const imgPaths = [
+    ["Belk Hall", "/pics/belk1.jpg"],
+    ["Colvard", "/pics/colvard1.jpg"],
+  ]
 
   function handleSlideChange(activeIndex) {
     slideIndex = activeIndex
@@ -35,12 +39,19 @@ function DisplayPage({ predictImage }) {
     setFileURL(URL.createObjectURL(event.target.files[0]))
   }
 
-  function handlePredictButtonClick() {
+  async function handlePredictButtonClick() {
     if (isSlideCustomImage()) {
-      predictImage(fileURL)
+      // predictedBldName = predictImage(fileURL)
     } else {
-      predictImage(imgPaths[slideIndex])
+      // selectedBldName = imgPaths[slideIndex - 1][0]
+      // predictedBldName = predictImage(imgPaths[slideIndex - 1][1])
+      // print for now
+      setSelectedBldName(imgPaths[slideIndex - 1][0])
+      let preBldName = await predictImage(imgPaths[slideIndex - 1][1])
+      console.log(preBldName)
+      setPredictedBldName(preBldName)
     }
+    setIsPredictionActive(true)
   }
 
   return (
@@ -81,7 +92,7 @@ function DisplayPage({ predictImage }) {
           </SwiperSlide>
           {imgPaths.map((imgPath, index) => (
             <SwiperSlide key={index}>
-              <img src={imgPath} alt="UNCC building" />
+              <img src={imgPath[1]} alt="UNCC building" />
             </SwiperSlide>
           ))}
           {/* <SwiperSlide>Slide 5</SwiperSlide> */}
@@ -89,8 +100,8 @@ function DisplayPage({ predictImage }) {
       </div>
       {isPredictionActive && (
         <div className="prediction-sec">
-          <p>Building Name:{"Sample"}</p>
-          <p>Predicted Building Name:{"Sample"}</p>
+          <p>Building Name: {selectedBldName}</p>
+          <p>Predicted Building Name: {predictedBldName}</p>
         </div>
       )}
 

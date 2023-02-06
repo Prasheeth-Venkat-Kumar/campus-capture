@@ -53,52 +53,42 @@ function App() {
       const outputMap = await modelSession.run(feeds)
       console.log(outputMap["495"].data)
       console.log(testImage.src)
-      getBuildingName(outputMap["495"].data)
+      return getBuildingName(outputMap["495"].data)
+      // console.log(getBuildingName(outputMap["495"].data))
     }
 
     // create function to get the highest value from the parameter array
     function getBuildingName(predictionsArray) {
       const max = Math.max(...predictionsArray)
       const index = predictionsArray.indexOf(max)
+      // change the print statement to return the building name
       switch (index) {
         case 0:
-          console.log("Smith")
-          break
+          return "Smith"
         case 1:
-          console.log("Belk")
-          break
+          return "Belk"
         case 2:
-          console.log("Colvard")
-          break
+          return "Colvard"
         case 3:
-          console.log("Prospector")
-          break
+          return "Prospector"
         case 4:
-          console.log("Burson")
-          break
+          return "Burson"
         case 5:
-          console.log("Atkins")
-          break
+          return "Atkins"
         case 6:
-          console.log("SAC")
-          break
+          return "SAC"
         case 7:
-          console.log("Cato")
-          break
+          return "Cato"
         case 8:
-          console.log("Woodward")
-          break
+          return "Woodward"
         case 9:
-          console.log("CHHS")
-          break
+          return "CHHS"
         case 10:
-          console.log("Student Union")
-          break
+          return "Student Union"
         case 11:
-          console.log("UREC")
-          break
+          return "UREC"
         default:
-          console.log("No building found")
+          return "No building found"
       }
     }
   }
