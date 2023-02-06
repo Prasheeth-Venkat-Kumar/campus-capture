@@ -6,9 +6,10 @@ import "swiper/css/navigation"
 import { Navigation } from "swiper"
 import { useState } from "react"
 import { Button } from "@mui/material"
+import { ThemeProvider } from "@emotion/react"
 // import pics from "../pics"
 
-function DisplayPage({ predictImage }) {
+function DisplayPage({ predictImage, theme }) {
   let slideIndex = 0
   //
   const [customImage, setCustomImage] = useState(null)
@@ -96,13 +97,15 @@ function DisplayPage({ predictImage }) {
       )}
 
       <div className="predict-button">
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => handlePredictButtonClick()}
-        >
-          PREDICT BUILDING
-        </Button>
+        <ThemeProvider theme={theme}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => handlePredictButtonClick()}
+          >
+            PREDICT BUILDING
+          </Button>
+        </ThemeProvider>
       </div>
 
       <div className="page-footer">
