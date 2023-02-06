@@ -17,7 +17,7 @@ function App() {
     console.log("Model loaded")
   }
   // Function to predict image
-  async function predictImage(image = "union.jpeg") {
+  async function predictImage(image = "/pics/woodward1.jpg") {
     const testImage = new Image()
     testImage.src = image
 

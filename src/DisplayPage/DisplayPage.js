@@ -14,10 +14,16 @@ function DisplayPage({ predictImage }) {
   const [customImage, setCustomImage] = useState(null)
   const [fileURL, setFileURL] = useState(null)
   const [isPredictionActive, setIsPredictionActive] = useState(true)
+  const [currImgPath, setCurrImgPath] = useState(null)
+  //
+  const [selectedBldName, setSelectedBldName] = useState(null)
+  const [predictedBldName, setPredictedBldName] = useState(null)
+
+  const imgPaths = ["", "/pics/belk1.jpg", "/pics/colvard1.jpg"]
 
   function handleSlideChange(activeIndex) {
     slideIndex = activeIndex
-    console.log("Active Slide Index: ", slideIndex)
+    // console.log("Active Slide Index: ", slideIndex)
   }
 
   function isSlideCustomImage() {
@@ -30,7 +36,11 @@ function DisplayPage({ predictImage }) {
   }
 
   function handlePredictButtonClick() {
-    predictImage()
+    if (isSlideCustomImage()) {
+      predictImage(fileURL)
+    } else {
+      predictImage(imgPaths[slideIndex])
+    }
   }
 
   return (
@@ -70,10 +80,10 @@ function DisplayPage({ predictImage }) {
             )}
           </SwiperSlide>
           <SwiperSlide>
-            <img src={require("../pics/urec1.jpg")} alt="Picture of UREC" />
+            <img src={imgPaths[1]} alt="Picture of UREC" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={require("../pics/chhs1.jpg")} alt="Picture of CHHS" />
+            <img src={imgPaths[2]} alt="Picture of CHHS" />
           </SwiperSlide>
           {/* <SwiperSlide>Slide 5</SwiperSlide> */}
         </Swiper>
