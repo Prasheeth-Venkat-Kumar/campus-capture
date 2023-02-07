@@ -13,7 +13,7 @@ function DisplayPage({ predictImage }) {
   //
   const [customImage, setCustomImage] = useState(null)
   const [fileURL, setFileURL] = useState(null)
-  const [isPredictionActive, setIsPredictionActive] = useState(true)
+  const [isPredictionActive, setIsPredictionActive] = useState(false)
   const [currImgPath, setCurrImgPath] = useState(null)
   //
   const [selectedBldName, setSelectedBldName] = useState(null)
@@ -28,6 +28,7 @@ function DisplayPage({ predictImage }) {
   function handleSlideChange(activeIndex) {
     slideIndex = activeIndex
     // console.log("Active Slide Index: ", slideIndex)
+    setIsPredictionActive(false)
   }
 
   function isSlideCustomImage() {
