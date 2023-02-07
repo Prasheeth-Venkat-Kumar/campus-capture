@@ -22,8 +22,30 @@ function DisplayPage({ predictImage, theme }) {
   // let selectedBldName = null
 
   const imgPaths = [
-    ["Belk Hall", "/pics/belk1.jpg"],
+    ["Belk Gym", "/pics/belk1.jpg"],
     ["Colvard", "/pics/colvard1.jpg"],
+    ["Burson", "/pics/burson1.jpg"],
+    ["Cato Hall", "/pics/cato1.jpg"],
+    ["College of Health and Human Services", "/pics/chhs1.jpg"],
+    ["Prospector", "/pics/prospector1.jpg"],
+    ["Popp Martin Student Union", "/pics/union1.jpg"],
+    ["University Recreation Center", "/pics/urec1.jpg"],
+    ["Atkins Library", "/pics/atkins1.jpg"],
+    ["Student Activity Center", "/pics/sac1.jpg"],
+    ["Woodward Hall", "/pics/woodward1.jpg"],
+    ["Smith", "/pics/smith1.jpg"],
+    ["Belk Gym", "/pics/belk2.jpg"],
+    ["Colvard", "/pics/colvard2.jpg"],
+    ["Burson", "/pics/burson2.jpg"],
+    ["Cato Hall", "/pics/cato2.jpg"],
+    ["College of Health and Human Services", "/pics/chhs2.jpg"],
+    ["Prospector", "/pics/prospector2.jpg"],
+    ["Popp Martin Student Union", "/pics/union2.jpg"],
+    ["University Recreation Center", "/pics/urec2.jpg"],
+    ["Atkins Library", "/pics/atkins2.jpg"],
+    ["Student Activity Center", "/pics/sac2.jpg"],
+    ["Woodward Hall", "/pics/woodward2.jpg"],
+    ["Smith", "/pics/smith2.jpg"],
   ]
 
   function handleSlideChange(activeIndex) {

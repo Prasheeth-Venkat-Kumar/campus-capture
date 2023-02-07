@@ -85,7 +85,7 @@ function getBuildingName(predictionsArray) {
   // change the print statement to return the building name
   switch (index) {
     case 0:
-      return "Smith Hall"
+      return "Smith"
     case 1:
       return "Belk Gym"
     case 2:
@@ -95,19 +95,19 @@ function getBuildingName(predictionsArray) {
     case 4:
       return "Burson"
     case 5:
-      return "Atkins"
+      return "Atkins Library"
     case 6:
-      return "SAC"
+      return "Student Activity Center"
     case 7:
-      return "Cato"
+      return "Cato Hall"
     case 8:
       return "Woodward"
     case 9:
-      return "CHHS"
+      return "College of Health and Human Services"
     case 10:
-      return "Student Union"
+      return "Popp Martin Student Union"
     case 11:
-      return "UREC"
+      return "University Recreation Center"
     default:
       return "No building found"
   }
