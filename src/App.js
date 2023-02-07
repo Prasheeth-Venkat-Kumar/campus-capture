@@ -4,7 +4,6 @@ import { Tensor, InferenceSession } from "onnxruntime-web"
 import * as tf from "@tensorflow/tfjs"
 import { useEffect, useState } from "react"
 import { createTheme } from "@mui/material/styles"
-import orange from "@mui/material/colors/orange"
 
 function App() {
   //
@@ -13,7 +12,7 @@ function App() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: orange[500],
+        main: "#fca311",
       },
     },
   })

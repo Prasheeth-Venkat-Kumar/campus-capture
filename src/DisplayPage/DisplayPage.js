@@ -70,14 +70,37 @@ function DisplayPage({ predictImage, theme }) {
         >
           <SwiperSlide>
             {!customImage && (
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(event) => handleCustomImageUpload(event)}
-              />
+              <ThemeProvider theme={theme}>
+                <Button variant="contained" component="label">
+                  UPLOAD CUSTOM IMAGE
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(event) => handleCustomImageUpload(event)}
+                    hidden
+                  />
+                </Button>
+              </ThemeProvider>
             )}
             {customImage && (
-              <img src={fileURL} alt="Custom Picture of a UNCC building" />
+              <div className="custom-img-container">
+                <img src={fileURL} alt="Custom Picture of a UNCC building" />
+                <ThemeProvider theme={theme}>
+                  <Button
+                    className="new-img-button"
+                    variant="contained"
+                    component="label"
+                  >
+                    UPLOAD NEW CUSTOM IMAGE
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(event) => handleCustomImageUpload(event)}
+                      hidden
+                    />
+                  </Button>
+                </ThemeProvider>
+              </div>
             )}
           </SwiperSlide>
           {imgPaths.map((imgPath, index) => (
@@ -85,7 +108,6 @@ function DisplayPage({ predictImage, theme }) {
               <img src={imgPath} alt="UNCC building" />
             </SwiperSlide>
           ))}
-          {/* <SwiperSlide>Slide 5</SwiperSlide> */}
         </Swiper>
       </div>
       {isPredictionActive && (
