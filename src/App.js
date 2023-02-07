@@ -3,10 +3,19 @@ import DisplayPage from "./DisplayPage/DisplayPage"
 import { Tensor, InferenceSession } from "onnxruntime-web"
 import * as tf from "@tensorflow/tfjs"
 import { useEffect, useState } from "react"
+import { createTheme } from "@mui/material/styles"
 
 function App() {
   //
   const [modelSession, setModelSession] = useState(null)
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#fca311",
+      },
+    },
+  })
 
   //
   async function loadModel() {
@@ -65,7 +74,7 @@ function App() {
   }, [])
   return (
     <div className="App">
-      <DisplayPage predictImage={predictImage} />
+      <DisplayPage predictImage={predictImage} theme={theme} />
     </div>
   )
 }
