@@ -43,6 +43,9 @@ function DisplayPage({ predictImage }) {
   async function handlePredictButtonClick() {
     if (isSlideCustomImage()) {
       // predictedBldName = predictImage(fileURL)
+      setSelectedBldName("Custom Image")
+      let preBldName = await predictImage(fileURL)
+      setPredictedBldName(preBldName)
     } else {
       // selectedBldName = imgPaths[slideIndex - 1][0]
       // predictedBldName = predictImage(imgPaths[slideIndex - 1][1])
