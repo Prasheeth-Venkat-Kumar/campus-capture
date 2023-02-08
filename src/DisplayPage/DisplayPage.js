@@ -10,16 +10,13 @@ import { ThemeProvider } from "@emotion/react"
 // import pics from "../pics"
 
 function DisplayPage({ predictImage, theme }) {
-  let slideIndex = 0
-  //
+  const [slideIndex, setSlideIndex] = useState(0)
   const [customImage, setCustomImage] = useState(null)
   const [fileURL, setFileURL] = useState(null)
   const [isPredictionActive, setIsPredictionActive] = useState(false)
   const [currImgPath, setCurrImgPath] = useState(null)
-  //
   const [selectedBldName, setSelectedBldName] = useState(null)
   const [predictedBldName, setPredictedBldName] = useState(null)
-  // let selectedBldName = null
 
   const imgPaths = [
     ["Belk Gym", "/pics/belk1.jpg"],
@@ -49,7 +46,7 @@ function DisplayPage({ predictImage, theme }) {
   ]
 
   function handleSlideChange(activeIndex) {
-    slideIndex = activeIndex
+    setSlideIndex(activeIndex)
     // console.log("Active Slide Index: ", slideIndex)
     setIsPredictionActive(false)
   }
@@ -65,14 +62,10 @@ function DisplayPage({ predictImage, theme }) {
 
   async function handlePredictButtonClick() {
     if (isSlideCustomImage()) {
-      // predictedBldName = predictImage(fileURL)
       setSelectedBldName("Custom Image")
       let preBldName = await predictImage(fileURL)
       setPredictedBldName(preBldName)
     } else {
-      // selectedBldName = imgPaths[slideIndex - 1][0]
-      // predictedBldName = predictImage(imgPaths[slideIndex - 1][1])
-      // print for now
       setSelectedBldName(imgPaths[slideIndex - 1][0])
       let preBldName = await predictImage(imgPaths[slideIndex - 1][1])
       console.log(preBldName)
