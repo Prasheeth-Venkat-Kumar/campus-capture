@@ -101,7 +101,7 @@ function getBuildingName(predictionsArray) {
     case 7:
       return "Cato Hall"
     case 8:
-      return "Woodward"
+      return "Woodward Hall"
     case 9:
       return "College of Health and Human Services"
     case 10:
