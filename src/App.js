@@ -15,6 +15,17 @@ function App() {
         main: "#fca311",
       },
     },
+
+    components: {
+      MuiAccordion: {
+        styleOverrides: {
+          root: {
+            backgroundColor: "#fca311",
+            color: "#000",
+          },
+        },
+      },
+    },
   })
 
   //
