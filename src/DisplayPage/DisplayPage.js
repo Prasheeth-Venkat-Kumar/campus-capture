@@ -62,6 +62,11 @@ function DisplayPage({ predictImage, theme }) {
 
   async function handlePredictButtonClick() {
     if (isSlideCustomImage()) {
+      // if custom image is empty, alert user
+      if (customImage == null) {
+        alert("Please upload a custom image first.")
+        return
+      }
       setSelectedBldName("Custom Image")
       let preBldName = await predictImage(fileURL)
       setPredictedBldName(preBldName)
