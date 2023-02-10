@@ -68,6 +68,40 @@ function App() {
     })
   }
 
+  function getBuildingName(predictionsArray) {
+    const max = Math.max(...predictionsArray)
+    const index = predictionsArray.indexOf(max)
+    // change the print statement to return the building name
+    switch (index) {
+      case 0:
+        return "Smith"
+      case 1:
+        return "Belk Gym"
+      case 2:
+        return "Colvard"
+      case 3:
+        return "Prospector"
+      case 4:
+        return "Burson"
+      case 5:
+        return "Atkins Library"
+      case 6:
+        return "Student Activity Center"
+      case 7:
+        return "Cato Hall"
+      case 8:
+        return "Woodward Hall"
+      case 9:
+        return "College of Health and Human Services"
+      case 10:
+        return "Popp Martin Student Union"
+      case 11:
+        return "University Recreation Center"
+      default:
+        return "No building found"
+    }
+  }
+
   // use effect to load model on page load
   useEffect(() => {
     loadModel()
@@ -77,48 +111,6 @@ function App() {
       <DisplayPage predictImage={predictImage} theme={theme} />
     </div>
   )
-}
-
-function getBuildingName(predictionsArray) {
-  const max = Math.max(...predictionsArray)
-  const index = predictionsArray.indexOf(max)
-  // change the print statement to return the building name
-  switch (index) {
-    case 0:
-      return "Smith"
-    case 1:
-      return "Belk Gym"
-    case 2:
-      return "Colvard"
-    case 3:
-      return "Prospector"
-    case 4:
-      return "Burson"
-    case 5:
-      return "Atkins Library"
-    case 6:
-      return "Student Activity Center"
-    case 7:
-      return "Cato Hall"
-    case 8:
-      return "Woodward Hall"
-    case 9:
-      return "College of Health and Human Services"
-    case 10:
-      return "Popp Martin Student Union"
-    case 11:
-      return "University Recreation Center"
-    default:
-      return "No building found"
-  }
-}
-
-function checkIfPathExists(path) {
-  try {
-    const file = require(path)
-  } catch (err) {
-    console.log("File does not exist")
-  }
 }
 
 export default App
