@@ -116,7 +116,7 @@ function App() {
   // use effect to load model on page load
   useEffect(() => {
     loadModel()
-  })
+  }, [])
   return (
     <div className="App">
       <DisplayPage predictImage={predictImage} theme={theme} />
