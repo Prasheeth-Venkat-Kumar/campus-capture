@@ -28,14 +28,6 @@ function App() {
     },
   })
 
-  //
-  async function loadModel() {
-    const session = await InferenceSession.create("./model.onnx", {
-      executionProviders: ["webgl"],
-    })
-    setModelSession(session)
-    console.log("Model loaded")
-  }
   // Function to predict image
   async function predictImage(image = "/pics/woodward1.jpg") {
     return new Promise((resolve, reject) => {
@@ -43,16 +35,16 @@ function App() {
       testImage.src = image
 
       testImage.onload = async () => {
-        console.log("Image loaded")
+        // console.log("Image loaded")
         // Convert image to tensor
         const imgTensor = tf.browser.fromPixels(testImage)
-        console.log("Inital image tensor shape", imgTensor.shape)
+        // console.log("Inital image tensor shape", imgTensor.shape)
         // resize tensor to 224, 224, 3
         const reshapedImgTensor = tf.image.resizeBilinear(imgTensor, [224, 224])
-        console.log("Reszied image tensor shape", reshapedImgTensor.shape)
+        // console.log("Reszied image tensor shape", reshapedImgTensor.shape)
         // transpose tensor to channel first
         const transImgTensor = reshapedImgTensor.transpose([2, 0, 1])
-        console.log("Converted image tensor shape", transImgTensor.shape)
+        // console.log("Converted image tensor shape", transImgTensor.shape)
         // flatten tensor
         const flattenedTensor = transImgTensor.flatten()
         // convert to array
@@ -72,8 +64,8 @@ function App() {
         }
         // run model
         const outputMap = await modelSession.run(feeds)
-        console.log(outputMap["495"].data)
-        console.log(testImage.src)
+        // console.log(outputMap["495"].data)
+        // console.log(testImage.src)
         resolve(getBuildingName(outputMap["495"].data))
       }
     })
@@ -115,8 +107,31 @@ function App() {
 
   // use effect to load model on page load
   useEffect(() => {
-    loadModel()
+    const downloadModel = async () => {
+      const modelURL =
+        "https://firebasestorage.googleapis.com/v0/b/campus-capture-4485b.appspot.com/o/model.onnx?alt=media&token=975fb6a3-d46f-4ab6-8cb2-b879c3e9d80e"
+      const response = await fetch(modelURL)
+      // check
+      const buffer = await response.arrayBuffer()
+      // check if buffer is valid
+      console.log(buffer)
+      try {
+        const model = await InferenceSession.create(null, {
+          executionProviders: ["webgl"],
+        })
+
+        if (model) console.log("Model loaded successfully")
+        else console.log("Model failed to load")
+
+        setModelSession(model)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    downloadModel()
   }, [])
+
   return (
     <div className="App">
       <DisplayPage predictImage={predictImage} theme={theme} />
