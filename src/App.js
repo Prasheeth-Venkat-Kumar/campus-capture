@@ -116,7 +116,7 @@ function App() {
       // check if buffer is valid
       console.log(buffer)
       try {
-        const model = await InferenceSession.create(null, {
+        const model = await InferenceSession.create(buffer, {
           executionProviders: ["webgl"],
         })
 
